@@ -16,7 +16,7 @@ class Usuarios extends CI_Controller{
         //vai carregar o modulo usuarios e mostrar a tela de login
         set_tema('titulo', 'Login');
         set_tema('conteudo', load_modulo('usuarios', 'login'));
-        set_tema('rodape', '<p>Rodapé adicionado</p>', FALSE);
+        set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
     }
 }

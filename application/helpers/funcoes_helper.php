@@ -43,8 +43,15 @@ function iniciar_painel(){
     //carregamento dos models 
     
     set_tema('titulo_padrao', 'Painel ADM');
-    set_tema('rodape', '<p>&copy; 2015 | Todos os direitos reservados para Alencar da Costa</p>').
+    set_tema('rodape', '<p>&copy; 2015 | Todos os direitos reservados para Alencar da Costa</p>');
     set_tema('template','painel_view');
+    
+    set_tema('headerinc', load_css('bootstrap.min','css/bootstrap'), FALSE);
+    set_tema('headerinc', load_css('font-awesome.min', 'css/font-awesome/css'), FALSE);
+    set_tema('headerinc', load_css(array('animate.min', 'style.min', 'style-responsive.min', 'default')), FALSE);
+    set_tema('footerinc', load_js(array('jquery-1.9.1.min', 'jquery-migrate-1.1.0.min'),'js/jquery'), FALSE);
+    set_tema('footerinc', load_js('jquery-ui.min', 'js/jquery-ui/ui/'), FALSE);
+    set_tema('footerinc', load_js(array('bootstrap.min', 'jquery.slimscroll.min', 'apps.min')), FALSE);
 }
 
 //carrega um template passando o array $tema como parametro
@@ -52,4 +59,47 @@ function load_template(){
     $CI =& get_instance();
     $CI->load->library('sistema');
     $CI->parser->parse($CI->sistema->tema['template'], get_tema());
+}
+
+//carrega um ou varios arquivos .css de uma pasta
+function load_css($arquivo=NULL, $pasta='css', $midias='all'){
+    if($arquivo != NULL){
+        $CI =& get_instance();
+        $CI->load->helper('url');
+        $retorno = '';
+        if(is_array($arquivo)){
+            foreach ($arquivo as $css) {
+                $retorno .= '<link rel="stylesheet" type="text/css" href="'.base_url("$pasta/$css.css").'" media="'.$midias.'" /> '."\n"; 
+            }
+        }  else {
+            $retorno = '<link rel="stylesheet" type="text/css" href="'.base_url("$pasta/$arquivo.css").'" media="'.$midias.'" /> '."\n";
+        }
+    }
+    return $retorno;
+}
+
+
+//carrega um ou varios arquivos .js de uma pasta ou servidor remoto
+function load_js($arquivo=NULL, $pasta='js', $remoto=FALSE){
+    if($arquivo != NULL){
+        $CI =& get_instance();
+        $CI->load->helper('url');
+        $retorno = '';
+        if(is_array($arquivo)){
+            foreach ($arquivo as $js) {
+                if($remoto){
+                    $retorno .= '<script type="text/javascript" src="'.$js.'" ></script>'."\n";
+                }  else {
+                    $retorno .= '<script type="text/javascript" src="'.base_url("$pasta/$js.js").'" ></script>'."\n";
+                }
+            }
+        }  else {
+            if($remoto){
+                $retorno .= '<script type="text/javascript" src="'.$arquivo.'" ></script>'."\n";
+            }  else {
+                $retorno .= '<script type="text/javascript" src="'.base_url("$pasta/$arquivo.js").'" ></script>'."\n";
+            }
+        }
+    }
+    return $retorno;
 }
