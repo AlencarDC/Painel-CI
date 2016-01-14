@@ -41,6 +41,7 @@ function iniciar_painel(){
     $CI->load->library(array('sistema','session','form_validation'));
     $CI->load->helper(array('form', 'url', 'array', 'text'));
     //carregamento dos models 
+    $CI->load->model('usuarios_model');
     
     set_tema('titulo_padrao', 'Painel ADM');
     set_tema('rodape', '<p>&copy; 2015 | Todos os direitos reservados para Alencar da Costa</p>');
@@ -102,4 +103,11 @@ function load_js($arquivo=NULL, $pasta='js', $remoto=FALSE){
         }
     }
     return $retorno;
+}
+
+//mostra erros de validação nos forms
+function validacao_erros(){
+    if(validation_errors()){
+        return validation_errors('<div class="alert alert-danger fade in m-b-15"><strong>Erro! </strong>','<span class="close" data-dismiss="alert">×</span></div>');
+    }
 }
