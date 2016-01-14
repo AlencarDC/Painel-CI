@@ -10,22 +10,117 @@
         {headerinc}
     </head>
     <body class="pace-top">
-        <div id="page-loader" class="fade in"><span class="spinner"></span></div>
-        <div id="page-container" class="fade">
-            <div class="login bg-black animated fadeInDown">
-                <!-- begin brand -->
-                <div class="login-header">
-                    <div class="brand">
-                        <span class="logo"></span> Painel ADM - Login
-                        <small>painel de administração com Code Igniter</small>
+       <?php if(esta_logado(FALSE)): ?>
+        <!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+            <!-- begin #header -->
+            <div id="header" class="header navbar navbar-default navbar-fixed-top">
+                <!-- begin container-fluid -->
+                <div class="container-fluid">
+                    <!-- begin mobile sidebar expand / collapse button -->
+                    <div class="navbar-header">
+                        <a href="<?php echo base_url('painel'); ?>" class="navbar-brand"><span class="navbar-logo"></span>Painel Admin</a>
+                        <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                     </div>
-                    <div class="icon">
-                        <i class="fa fa-sign-in"></i>
-                    </div>
+                    <!-- end mobile sidebar expand / collapse button -->
+
+                    <!-- begin header navigation right -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown navbar-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
+                                <span class="hidden-xs"><?php echo $this->session->userdata('usuario_nome'); ?></span> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInLeft">
+                                <li class="arrow"></li>
+                                <li><?php echo anchor('usuarios/alterar_senha/'.$this->session->userdata('usuario_id'), 'Alterar senha'); ?></li>
+                                <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
+                                <li class="divider"></li>
+                                <li><?php echo anchor('usuarios/logoff', 'Sair'); ?></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- end header navigation right -->
                 </div>
-                {conteudo}
+                <!-- end container-fluid -->
             </div>
+            <!-- end #header -->
+            
+            <!-- begin #sidebar -->
+            <div id="sidebar" class="sidebar">
+                <!-- begin sidebar scrollbar -->
+                <div data-scrollbar="true" data-height="100%">
+                    <!-- begin sidebar user -->
+                    <ul class="nav">
+                        <li class="nav-profile">
+                            <div class="info">
+                                <?php echo $this->session->userdata('usuario_nome'); ?>
+                                <small><?php echo $this->session->userdata('usuario_login').' | '.$this->session->userdata('usuario_email'); ?></small>
+                            </div>
+                        </li>
+                    </ul>
+                        <!-- end sidebar user -->
+                        <!-- begin sidebar nav -->
+                        <ul class="nav">
+                                <li class="nav-header">Menu</li>
+                                <li class="has-sub">
+                                        <a href="javascript:;">
+                                            <b class="caret pull-right"></b>
+                                            <i class="fa fa-users"></i>
+                                            <span>Usuários</span>
+                                    </a>
+                                        <ul class="sub-menu">
+                                            <li><?php echo anchor('usuarios/gerenciar', 'Gerenciar'); ?></li>
+                                            <li><?php echo anchor('usuarios/Cadastrar', 'Cadastrar'); ?></li>
+                                        </ul>
+                                </li>
+                                <li class="has-sub">
+                                        <a href="javascript:;">
+                                                <span class="badge pull-right">10</span>
+                                                <i class="fa fa-inbox"></i> 
+                                                <span>Email</span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li><a href="email_inbox.html">Inbox v1</a></li>
+                                        </ul>
+                                </li>
+                                <li class="has-sub">
+                                        <a href="javascript:;">
+                                            <b class="caret pull-right"></b>
+                                            <i class="fa fa-suitcase"></i>
+                                            <span>UI Elements</span> 
+                                        </a>
+                                        <ul class="sub-menu">
+                                                <li><a href="ui_general.html">General</a></li>
+                                        </ul>
+                                </li>
+                                <li class="has-sub">
+                                        <a href="javascript:;">
+                                            <b class="caret pull-right"></b>
+                                            <i class="fa fa-file-o"></i>
+                                            <span>Form Stuff</span> 
+                                        </a>
+                                        <ul class="sub-menu">
+                                                <li><a href="form_elements.html">Form Elements</a></li>
+                                        </ul>
+                                </li>
+                        <!-- begin sidebar minify button -->
+                                <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                        <!-- end sidebar minify button -->
+                        </ul>
+                        <!-- end sidebar nav -->
+                </div>
+                <!-- end sidebar scrollbar -->
+            </div>
+            <div class="sidebar-bg"></div>
+            <!-- end #sidebar -->
         </div>
+       <?php endif; ?>
+        {conteudo}
+            
         {rodape}
         {footerinc}
         <script>

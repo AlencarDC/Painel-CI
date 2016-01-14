@@ -111,3 +111,20 @@ function validacao_erros(){
         return validation_errors('<div class="alert alert-danger fade in m-b-15"><strong>Erro! </strong>','<span class="close" data-dismiss="alert">×</span></div>');
     }
 }
+
+//verifica se o usuario está logado no sistema
+function esta_logado($redirecionar=TRUE) {
+    $CI =& get_instance();
+    $CI->load->library('session');
+    $usuario_status = $CI->session->userdata('usuario_logado');
+    if(!isset($usuario_status) OR $usuario_status!=TRUE){
+        $CI->session->sess_destroy();
+        if($redirecionar){
+            redirect('usuarios/login');
+        }else{
+            return FALSE;
+        }
+    } else {
+        return TRUE;
+    }
+}

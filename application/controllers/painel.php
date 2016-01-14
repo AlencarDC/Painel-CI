@@ -4,6 +4,8 @@ class Painel extends CI_Controller{
     
     public function __construct(){
         parent::__construct();
+        $this->load->library('sistema');
+        iniciar_painel();
     }
     
     public function index(){
@@ -11,7 +13,14 @@ class Painel extends CI_Controller{
     }
     
     public function inicio(){
-        redirect('usuarios/login');
+        if(esta_logado(FALSE)){
+            set_tema('titulo', 'Home');
+            set_tema('conteudo', '');
+            set_tema('rodape', '');
+            load_template();
+        } else {
+            redirect('usuarios/login');
+        }
     }
 }
 

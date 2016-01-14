@@ -2,6 +2,19 @@
 
  switch ($tela) {
     case 'login':
+        echo '<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+                <div id="page-container" class="fade">
+                    <div class="login bg-black animated fadeInDown">
+                        <!-- begin brand -->
+                        <div class="login-header">
+                            <div class="brand">
+                                <span class="logo"></span> Painel ADM - Login
+                                <small>painel de administração com Code Igniter</small>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-sign-in"></i>
+                            </div>
+                        </div>';
         echo '<div class="login-content" >';
         echo validacao_erros();
         //echo form_fieldset('Identifique-se');
@@ -20,7 +33,9 @@
         echo '</div>';
         echo form_close();
         //echo form_fieldset_close();
-        echo '</div>';
+        echo '</div>
+            </div>
+        </div>';
         break;
 
     default:
