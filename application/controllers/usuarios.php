@@ -15,7 +15,7 @@ class Usuarios extends CI_Controller{
     public function login(){
         //eu adicionei
         if($this->session->userdata('usuario_logado')){
-            redirect('painel');
+           redirect('painel');
         }
         //regras de validação de login
         $this->form_validation->set_rules('usuario', 'USUÁRIO', 'trim|required|min_length[4]|strtolower');
@@ -37,7 +37,17 @@ class Usuarios extends CI_Controller{
                 $this->session->set_userdata($dados);
                 redirect('painel');
             }else{ 
-                echo 'login falho';
+                $consulta = $this->usuarios_model->pega_login($usuario)->row();
+                if(empty($consulta)){
+                    define_msg('errologin', 'Esse usuário não existe.', 'erro');
+                }elseif($consulta->senha != $senha){
+                    define_msg('errologin', 'Senha incorreta.', 'erro');
+                }elseif($consulta->ativo == 0){
+                    define_msg('errologin', 'Esse usuário está inativo.', 'erro');
+                }else{
+                    define_msg('errologin', 'Problemas com o LogIn, contate o desenvolvedor.', 'erro');
+                }
+                redirect('usuarios/login');
             } 
         }
         
@@ -46,5 +56,13 @@ class Usuarios extends CI_Controller{
         set_tema('conteudo', load_modulo('usuarios', 'login'));
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
+    }
+    
+    public function logoff(){
+        $this->session->unset_userdata(array('usuario_id','usuario_nome','usuario_email','usuario_login','usuario_adm','usuario_logado'));
+        //$this->session->sess_destroy(); //tenho medo de não fazer esse destroy, perguntar sobre para o professor
+        $this->session->sess_regenerate(TRUE);
+        define_msg('logoffok','O logoff foi efetuado.', 'sucesso');
+        redirect('usuarios/login');  
     }
 }

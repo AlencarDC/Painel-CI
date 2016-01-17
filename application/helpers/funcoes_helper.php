@@ -118,7 +118,7 @@ function esta_logado($redirecionar=TRUE) {
     $CI->load->library('session');
     $usuario_status = $CI->session->userdata('usuario_logado');
     if(!isset($usuario_status) OR $usuario_status!=TRUE){
-        $CI->session->sess_destroy();
+        //$CI->session->sess_destroy();//o ricardo excluiu essa linha
         if($redirecionar){
             redirect('usuarios/login');
         }else{
@@ -127,4 +127,34 @@ function esta_logado($redirecionar=TRUE) {
     } else {
         return TRUE;
     }
+}
+
+//define uma mensagem para ser exibida na proxima tela carregada
+function define_msg($id='msgerro', $msg=NULL, $tipo='erro'){
+    $CI =& get_instance();
+    switch ($tipo) {
+        case 'erro':
+            $CI->session->set_flashdata($id,'<div class="alert alert-danger fade in m-b-15"><strong>Erro! </strong>'.$msg.'<span class="close" data-dismiss="alert">×</span></div>');
+            break;
+        case 'sucesso':
+            $CI->session->set_flashdata($id,'<div class="alert alert-success fade in m-b-15"><strong>Sucesso! </strong>'.$msg.'<span class="close" data-dismiss="alert">×</span></div>');
+            break;
+        default:
+            $CI->session->set_flashdata($id,'<div class="alert alert-info fade in m-b-15"><strong>Informação! </strong>'.$msg.'<span class="close" data-dismiss="alert">×</span></div>');
+            break;
+    }
+}
+
+//verifica se há uma mensagem para ser exibida na tela atual
+function verifica_msg($id,$printar=TRUE){
+    $CI =& get_instance();
+    if($CI->session->flashdata($id)){
+        if($printar){
+            echo $CI->session->flashdata($id);
+            return TRUE;
+        }else{
+            return $CI->session->flashdata($id);
+        }
+    }
+    return FALSE;
 }

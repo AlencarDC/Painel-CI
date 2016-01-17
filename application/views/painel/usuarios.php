@@ -16,7 +16,10 @@
                             </div>
                         </div>';
         echo '<div class="login-content" >';
+        verifica_msg('logoffok');
+        verifica_msg('errologin');
         echo validacao_erros();
+        
         //echo form_fieldset('Identifique-se');
         echo form_open('usuarios/login', array('class'=>'margin-bottom-0'));
         //echo form_label('Usuário', 'usuario');
