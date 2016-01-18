@@ -19,10 +19,33 @@ class Usuarios_model extends CI_Model{
         }
     }
     
+    //
+    public function fazer_update($dados=NULL,$condicao=NULL,$redirecionar=TRUE){
+        if($dados != NULL && is_array($condicao)){
+            if($this->db->update('usuarios', $dados, $condicao)){
+                define_msg('msgok', 'Alteração efetuada com sucesso', 'sucesso');
+            }else{
+                define_msg('msgerro', 'Não foi possivel atualizar o banco de dados', 'erro');
+            }
+            if($redir){redirect(current_url());}
+        }
+    }
+    
     //pega as informações do usuario que logou através do seu usuario(login)
     public function pega_login($login=NULL){
         if ($login!=NULL) {
             $this->db->where('login', $login);
+            $this->db->limit(1);
+            return $this->db->get('usuarios');
+        } else {
+            return FALSE;
+        }
+    }
+    
+    //pega as informações do usuario que logou através do seu email para recuperação de senha
+    public function pega_email($email=NULL){
+        if ($email!=NULL) {
+            $this->db->where('email', $email);
             $this->db->limit(1);
             return $this->db->get('usuarios');
         } else {
