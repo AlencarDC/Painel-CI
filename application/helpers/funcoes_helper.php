@@ -120,6 +120,7 @@ function esta_logado($redirecionar=TRUE) {
     if(!isset($usuario_status) OR $usuario_status!=TRUE){
         //$CI->session->sess_destroy();//o ricardo excluiu essa linha
         if($redirecionar){
+            define_msg('errologin', 'Acesso restrito, faça login para prosseguir.');
             redirect('usuarios/login');
         }else{
             return FALSE;
@@ -157,4 +158,18 @@ function verifica_msg($id,$printar=TRUE){
         }
     }
     return FALSE;
+}
+
+// verifica se o usuario atual é administrador
+function verifica_adm($msg=FALSE){
+    $CI =& get_instance();
+    $usuario_adm = $CI->session->userdata('usuario_adm');
+    if(!isset($usuario_adm) || $usuario_adm != TRUE){
+        if($msg){
+            define_msg('msgerro', 'Seu usuário não tem permissão para executar essa operação', 'erro');
+        }
+        return FALSE;
+    }else{
+        return TRUE;
+    }
 }

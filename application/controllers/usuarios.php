@@ -100,4 +100,34 @@ class Usuarios extends CI_Controller{
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
     }
+    
+    public function cadastrar(){
+        esta_logado(TRUE);
+        $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado no sistema');
+        $this->form_validation->set_message('matches', 'O campo %s está diferente do campo %s');
+        $this->form_validation->set_rules('nome', 'NOME', 'trim|required|ucwords');
+        $this->form_validation->set_rules('email', 'EMAIL', 'trim|required|valid_email|is_unique[usuarios.email]|strtolower');
+        $this->form_validation->set_rules('login', 'LOGIN', 'trim|required|min_length[4]|is_unique[usuarios.login]|strtolower');
+        $this->form_validation->set_rules('senha', 'SENHA', 'trim|required|min_length[4]');
+        $this->form_validation->set_rules('senha2', 'REPITA A SENHA', 'trim|required|min_length[4]|matches[senha]');
+        if($this->form_validation->run()==TRUE){
+            $dados = elements(array('nome', 'email', 'login'), $this->input->post());
+            $dados['senha'] = md5($this->input->post('senha'));
+            if(verifica_adm()){
+                $dados['adm'] = ($this->input->post('check')==1 ? 1 : 0);
+            }
+            if($this->input->post('check')==1 && $dados['adm']== 0){
+                define_msg('msgerro', 'Seu usuário não tem permissão para executar essa operação', 'erro');
+                redirect(current_url());
+            }
+            $this->usuarios_model->fazer_insert($dados);
+        }
+        
+        //vai carregar o modulo usuarios e mostrar a tela de recuperação de senha
+        set_tema('titulo', 'Cadastar Usuários');
+        set_tema('conteudo', load_modulo('usuarios', 'cadastrar'));
+        set_tema('rodape', '');//vai substituir o rodape padrao
+        load_template();
+        
+    }
 }

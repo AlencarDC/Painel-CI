@@ -76,6 +76,59 @@
             </div>
         </div>';
         break;
+    
+    case 'cadastrar':
+        echo '<div id="content" class="content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Cadastrar Usuário</h4>
+                        </div>
+                    <div class="panel-body">';
+        verifica_msg('msgok');
+        verifica_msg('msgerro');
+        echo validacao_erros();
+        echo form_open('usuarios/cadastrar');
+        echo '          <div class="form-group">
+                            <label>Nome Completo</label>';
+            echo form_input(array('name'=>'nome', 'class'=>'form-control input-lg', 'placeholder'=>'Nome completo'), set_value('nome'), 'autofocus');
+        echo '              </label> 
+                        </div>';
+        echo '          <div class="form-group">
+                            <label>Email</label>';
+            echo form_input(array('name'=>'email', 'class'=>'form-control input-lg', 'placeholder'=>'Email'), set_value('email'));
+        echo '              </label> 
+                        </div>';
+        echo '          <div class="form-group">
+                            <label>Login</label>';
+            echo form_input(array('name'=>'login', 'class'=>'form-control input-lg', 'placeholder'=>'Login'), set_value('login'));
+        echo '              </label> 
+                        </div>';
+        echo '          <div class="form-group">
+                            <label>Senha</label>';
+            echo form_password(array('name'=>'senha', 'class'=>'form-control input-lg', 'placeholder'=>'Senha'), set_value('senha'));
+        echo '              </label> 
+                        </div>';
+        echo '          <div class="form-group">
+                            <label>Repita a senha</label>';
+            echo form_password(array('name'=>'senha2', 'class'=>'form-control input-lg', 'placeholder'=>'Repita a senha'), set_value('senha2'));
+        echo '               </label> 
+                        </div>';
+        echo '          <div class="checkbox">
+                            <label>';
+            echo form_checkbox(array('name'=>'check', 'class'=>''), '1').'Dar poderes administrativos a esse usuário';
+        echo '              </label> 
+                        </div>';
+            echo form_submit(array('name'=>'cadastrar', 'class'=>'btn btn-sm btn-success m-r-5'), 'Cadastrar');
+            echo anchor('usuarios/gerenciar', 'Cancelar', array('class'=>'btn btn-sm btn-default'));
+        echo form_close();
+        echo '          </div>
+                    </div>
+                </div>
+            </div>
+            </div>';
+        break;
 
     default:
         echo '<div class="alert-box alert"><p>A tela solicitada não existe</p></div>';

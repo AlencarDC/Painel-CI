@@ -74,7 +74,7 @@
                                     </a>
                                         <ul class="sub-menu">
                                             <li><?php echo anchor('usuarios/gerenciar', 'Gerenciar'); ?></li>
-                                            <li><?php echo anchor('usuarios/Cadastrar', 'Cadastrar'); ?></li>
+                                            <li><?php echo anchor('usuarios/cadastrar', 'Cadastrar'); ?></li>
                                         </ul>
                                 </li>
                                 <li class="has-sub">
@@ -117,11 +117,15 @@
             </div>
             <div class="sidebar-bg"></div>
             <!-- end #sidebar -->
-        </div>
+
+        
        <?php endif; ?>
         {conteudo}
             
         {rodape}
+       <?php if(esta_logado(FALSE)): ?>
+        </div>
+        <?php endif; ?>
         {footerinc}
         <script>
 		$(document).ready(function() {

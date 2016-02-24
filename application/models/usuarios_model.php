@@ -1,6 +1,17 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuarios_model extends CI_Model{
+    //insere
+    public function fazer_insert($dados=NULL, $redir=TRUE){
+        if($dados != NULL){
+            if($this->db->insert('usuarios', $dados)){
+                define_msg('msgok', 'Inserção efetuada com sucesso', 'sucesso');
+            }else{
+                define_msg('msgerro', 'Não foi possivel inserir no banco de dados', 'erro');
+            }
+            if($redir){redirect(current_url());}
+        }
+    }
     
     //verifica se os dados de login estão corretos e retorna Sim ou Nao
     public function fazer_login($usuario=NULL,$senha=NULL){
