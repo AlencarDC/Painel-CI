@@ -63,6 +63,11 @@ class Usuarios_model extends CI_Model{
             return FALSE;
         }
     }
+    
+    //pega todos registros da tabela usuarios
+    public function pega_usuarios(){
+        return $this->db->get('usuarios');
+    }
 }
 
 

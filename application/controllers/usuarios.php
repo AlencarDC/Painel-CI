@@ -52,6 +52,11 @@ class Usuarios extends CI_Controller{
         }
         
         //vai carregar o modulo usuarios e mostrar a tela de login
+        set_tema('footerinc', '<script>
+            $(document).ready(function() {
+                    App.init();
+            });
+	</script>', FALSE);
         set_tema('titulo', 'Login');
         set_tema('conteudo', load_modulo('usuarios', 'login'));
         set_tema('rodape', '');//vai substituir o rodape padrao
@@ -95,6 +100,11 @@ class Usuarios extends CI_Controller{
             }
         }
         //vai carregar o modulo usuarios e mostrar a tela de recuperação de senha
+        set_tema('footerinc', '<script>
+            $(document).ready(function() {
+                    App.init();
+            });
+	</script>', FALSE);
         set_tema('titulo', 'Login');
         set_tema('conteudo', load_modulo('usuarios', 'nova_senha'));
         set_tema('rodape', '');//vai substituir o rodape padrao
@@ -124,10 +134,39 @@ class Usuarios extends CI_Controller{
         }
         
         //vai carregar o modulo usuarios e mostrar a tela de recuperação de senha
+        set_tema('footerinc', '<script>
+            $(document).ready(function() {
+                    App.init();
+            });
+	</script>', FALSE);
         set_tema('titulo', 'Cadastar Usuários');
         set_tema('conteudo', load_modulo('usuarios', 'cadastrar'));
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
         
+    }
+    
+    public function gerenciar(){
+        $this->load->library('table');
+        esta_logado();
+        
+        //vai carregar o modulo usuarios e mostrar a tela de recuperação de senha
+        set_tema('headerinc', load_css('dataTables.bootstrap.min'), FALSE);
+        set_tema('headerinc', load_css('responsive.bootstrap.min'), FALSE);
+        set_tema('headerinc', load_css('ionicons.min', 'css/ionicons/css'), FALSE);
+        set_tema('footerinc', load_js('jquery.dataTables'), FALSE);
+        set_tema('footerinc', load_js('dataTables.bootstrap.min'), FALSE);
+        set_tema('footerinc', load_js('dataTables.responsive.min'), FALSE);
+        set_tema('footerinc', load_js('table-manage-responsive.demo.min'), FALSE);
+        set_tema('footerinc', '<script>
+		$(document).ready(function() {
+			App.init();
+			TableManageResponsive.init();
+		});
+	</script>', FALSE);
+        set_tema('titulo', 'Gerenciar Usuários');
+        set_tema('conteudo', load_modulo('usuarios', 'gerenciar'));
+        set_tema('rodape', '');//vai substituir o rodape padrao
+        load_template();
     }
 }

@@ -129,6 +129,37 @@
             </div>
             </div>';
         break;
+    
+    case 'gerenciar':
+        echo '<div id="content" class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Gerenciar Usuário</h4>
+                        </div>
+                    <div class="panel-body">';
+        $this->table->set_template(array('table_open'=>'<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">'));
+        $this->table->set_heading('Nome', 'Login', 'Email', 'Ativo', 'Adm', 'Ações');
+        $consulta = $this->usuarios_model->pega_usuarios()->result();
+        foreach ($consulta as $linha) {
+            $conteudo = array(
+                $linha->nome,
+                $linha->login,
+                $linha->email,
+                ($linha->ativo==0) ? '<i class="ion-close fa-2x text-danger"></i>' : '<i class="ion-checkmark fa-2x text-success"></i>',
+                ($linha->adm==0) ? '<i class="ion-close fa-2x text-danger"></i>' : '<i class="ion-checkmark fa-2x text-success"></i>',
+                anchor("usuarios/editar/$linha->id", '<i class="ion-trash-a fa-2x text-inverse"></i>', 'Deletar').' '.anchor("usuarios/editar/$linha->id",'<i class="ion-edit fa-2x text-inverse"></i>', 'Editar').' '.anchor("usuarios/alterar_senha/$linha->id",'<i class="ion-locked fa-2x text-inverse"></i>', 'Alterar Senha')
+                );
+            $this->table->add_row($conteudo);
+        }
+        echo $this->table->generate();
+        echo '          </div>
+                    </div>
+                </div>
+            </div>
+            </div>';
+        break;
 
     default:
         echo '<div class="alert-box alert"><p>A tela solicitada não existe</p></div>';

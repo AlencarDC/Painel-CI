@@ -17,6 +17,12 @@ class Painel extends CI_Controller{
             set_tema('titulo', 'Home');
             set_tema('conteudo', '');
             set_tema('rodape', '');
+            set_tema('footerinc', '<script>
+		$(document).ready(function() {
+			App.init();
+			TableManageResponsive.init();
+		});
+	</script>', FALSE);
             load_template();
         } else {
             redirect('usuarios/login');
