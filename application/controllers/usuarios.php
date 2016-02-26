@@ -169,4 +169,24 @@ class Usuarios extends CI_Controller{
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
     }
+    
+    public function alterar_senha(){
+        esta_logado();
+        $this->form_validation->set_rules('senha', 'SENHA', 'trim|required|min_length[4]');
+        $this->form_validation->set_rules('senha2', 'REPITA A SENHA', 'trim|required|min_length[4]|matches[senha]');
+        if($this->form_validation->run()==TRUE){
+            $dados['senha'] = md5($this->input->post('senha'));
+            $this->usuarios_model->fazer_update($dados, array('id' => $this->input->post('idusuario')));
+        }
+        
+        set_tema('footerinc', '<script>
+            $(document).ready(function() {
+                    App.init();
+            });
+	</script>', FALSE);
+        set_tema('titulo', 'Alterar Senha');
+        set_tema('conteudo', load_modulo('usuarios', 'alterar_senha'));
+        set_tema('rodape', '');//vai substituir o rodape padrao
+        load_template();
+    }
 }

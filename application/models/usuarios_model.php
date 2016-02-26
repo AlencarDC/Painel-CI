@@ -38,7 +38,7 @@ class Usuarios_model extends CI_Model{
             }else{
                 define_msg('msgerro', 'Não foi possivel atualizar o banco de dados', 'erro');
             }
-            if($redir){redirect(current_url());}
+            if($redirecionar){redirect(current_url());}
         }
     }
     
@@ -57,6 +57,16 @@ class Usuarios_model extends CI_Model{
     public function pega_email($email=NULL){
         if ($email!=NULL) {
             $this->db->where('email', $email);
+            $this->db->limit(1);
+            return $this->db->get('usuarios');
+        } else {
+            return FALSE;
+        }
+    }
+    //pega as informações de algum usuario através do id dele
+    public function pega_id($id=NULL){
+        if ($id != NULL) {
+            $this->db->where('id', $id);
             $this->db->limit(1);
             return $this->db->get('usuarios');
         } else {
