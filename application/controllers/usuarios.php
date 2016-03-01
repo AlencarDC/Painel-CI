@@ -172,6 +172,7 @@ class Usuarios extends CI_Controller{
     
     public function alterar_senha(){
         esta_logado();
+        $this->form_validation->set_message('matches', 'O campo %s está diferente do campo %s');
         $this->form_validation->set_rules('senha', 'SENHA', 'trim|required|min_length[4]');
         $this->form_validation->set_rules('senha2', 'REPITA A SENHA', 'trim|required|min_length[4]|matches[senha]');
         if($this->form_validation->run()==TRUE){
@@ -186,6 +187,32 @@ class Usuarios extends CI_Controller{
 	</script>', FALSE);
         set_tema('titulo', 'Alterar Senha');
         set_tema('conteudo', load_modulo('usuarios', 'alterar_senha'));
+        set_tema('rodape', '');//vai substituir o rodape padrao
+        load_template();
+    }
+    
+     public function editar(){
+        esta_logado();
+        $this->form_validation->set_rules('nome', 'NOME', 'trim|required|ucwords');
+        if($this->form_validation->run()==TRUE){
+            $dados['nome'] = $this->input->post('nome');
+            if(verifica_adm()){
+                $dados['ativo'] = ($this->input->post('ativo')==1) ? 1 : 0;
+                $dados['adm'] = ($this->input->post('check')==1) ? 1 : 0;
+            }
+            if(($this->input->post('check')==1 || $this->input->post('ativo')==1 || $this->input->post('ativo')==0) && $this->session->userdata('usuario_adm')== 0){
+                define_msg('msgerro', 'Seu usuário não tem permissão para executar essa operação', 'erro');
+                redirect(current_url());
+            }
+            $this->usuarios_model->fazer_update($dados, array('id' => $this->input->post('idusuario')));
+        }
+        set_tema('footerinc', '<script>
+            $(document).ready(function() {
+                    App.init();
+            });
+	</script>', FALSE);
+        set_tema('titulo', 'Alterar Usuário');
+        set_tema('conteudo', load_modulo('usuarios', 'editar'));
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
     }

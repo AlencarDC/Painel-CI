@@ -177,7 +177,7 @@
                             <h4 class="panel-title">Cadastrar Usuário</h4>
                         </div>
                     <div class="panel-body">';
-        if(verifica_adm(TRUE) || $idusuario == $this->session->userdata('usuario_id')){
+        if(verifica_adm() || $idusuario == $this->session->userdata('usuario_id')){
             $consulta = $this->usuarios_model->pega_id($idusuario)->row();
             verifica_msg('msgok');
             echo validacao_erros();
@@ -212,6 +212,68 @@
                 echo anchor('usuarios/gerenciar', 'Cancelar', array('class'=>'btn btn-sm btn-default'));
             echo form_close();
         }else{
+            define_msg('msgerro', 'Seu usuário não tem permissão para executar essa operação', 'erro');
+            redirect('usuarios/gerenciar');
+        }
+        
+        echo '          </div>
+                    </div>
+                </div>
+            </div>
+            </div>';
+        break;
+        
+    case 'editar':
+        $idusuario = $this->uri->segment(3);
+        if($idusuario == NULL){
+            define_msg('msgerro', 'Para editar as informações é necessário escolher um usuário.', 'erro');
+            redirect('usuarios/gerenciar');
+        }
+        echo '<div id="content" class="content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Alterar Usuário</h4>
+                        </div>
+                    <div class="panel-body">';
+        if(verifica_adm() || $idusuario == $this->session->userdata('usuario_id')){
+            $consulta = $this->usuarios_model->pega_id($idusuario)->row();
+            verifica_msg('msgok');
+            verifica_msg('msgerro');
+            echo validacao_erros();
+            echo form_open(current_url());
+            echo '          <div class="form-group">
+                                <label>Nome Completo</label>';
+                echo form_input(array('name'=>'nome', 'class'=>'form-control input-lg', 'placeholder'=>'Nome completo'), set_value('nome',$consulta->nome), 'autofocus');
+            echo '              </label> 
+                            </div>';
+            echo '          <div class="form-group">
+                                <label>Email</label>';
+                echo form_input(array('name'=>'email', 'class'=>'form-control input-lg', 'placeholder'=>'Email', 'disabled'=>'disabled'), set_value('email',$consulta->email));
+            echo '              </label> 
+                            </div>';
+            echo '          <div class="form-group">
+                                <label>Login</label>';
+                echo form_input(array('name'=>'login', 'class'=>'form-control input-lg', 'placeholder'=>'Login', 'disabled'=>'disabled'), set_value('login',$consulta->login));
+            echo '              </label> 
+                            </div>';
+            echo '          <div class="checkbox">
+                            <label>';
+                echo form_checkbox(array('name'=>'ativo', 'class'=>''), '1', ($consulta->ativo==1) ? TRUE : FALSE).'Permitir o acesso desse usuário ao sistema.';
+            echo '              </label> 
+                        </div>';
+            echo '          <div class="checkbox">
+                            <label>';
+                echo form_checkbox(array('name'=>'check', 'class'=>''), '1', ($consulta->adm==1) ? TRUE : FALSE).'Dar poderes administrativos a esse usuário.';
+            echo '              </label> 
+                        </div>';
+                echo form_hidden('idusuario', $idusuario);
+                echo form_submit(array('name'=>'editar', 'class'=>'btn btn-sm btn-success m-r-5'), 'Editar');
+                echo anchor('usuarios/gerenciar', 'Cancelar', array('class'=>'btn btn-sm btn-default'));
+            echo form_close();
+        }else{
+            define_msg('msgerro', 'Seu usuário não tem permissão para executar essa operação', 'erro');
             redirect('usuarios/gerenciar');
         }
         
