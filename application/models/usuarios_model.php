@@ -42,6 +42,17 @@ class Usuarios_model extends CI_Model{
         }
     }
     
+    public function fazer_delete($condicao=NULL, $redirecionar=TRUE){
+        if($condicao!=NULL && is_array($condicao)){
+            if($this->db->delete('usuarios', $condicao)){
+                define_msg('msgok', 'Exclusão efetuada com sucesso', 'sucesso');
+            }else{
+                define_msg('msgerro', 'Não foi possivel excluir os dados.', 'erro');
+            }
+            if($redirecionar){redirect(current_url());}
+        }
+    }
+    
     //pega as informações do usuario que logou através do seu usuario(login)
     public function pega_login($login=NULL){
         if ($login!=NULL) {

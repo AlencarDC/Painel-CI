@@ -216,4 +216,28 @@ class Usuarios extends CI_Controller{
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
     }
+    
+    public function excluir(){
+        esta_logado();
+        if(verifica_adm(TRUE)){
+            $idusuario = $this->uri->segment(3);
+            if($idusuario != NULL){
+                $consulta = $this->usuarios_model->pega_id($idusuario);
+                if($consulta->num_rows()==1){
+                    $consulta = $consulta->row();
+                    if($consulta->id != 1){
+                        $this->usuarios_model->fazer_delete(array('id'=>$consulta->id), FALSE);
+                    }else{
+                        define_msg('msgerro', 'Este usuário não pode ser excluído.', 'erro');
+                    }
+                }else{
+                    define_msg('msgerro', 'Usuário não encontrado para exclusão.', 'erro');
+                }
+            }else{
+                define_msg('msgerro', 'Escolha um usuário para excluir.', 'erro');
+            }
+        }
+        redirect('usuarios/gerenciar');
+        
+    }
 }

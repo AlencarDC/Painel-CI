@@ -131,6 +131,13 @@
         break;
     
     case 'gerenciar':
+        echo '<script type="text/javascript">
+                $(function(){
+                    $(".deletar").click(function(){
+                        if(confirm("Tem certeza de que deseja excluir esse registro?\nEsta operação não poderá ser desfeita.")) return true; else return false;
+                    });
+                });
+              </script>';
         echo '<div id="content" class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -151,7 +158,7 @@
                 $linha->email,
                 ($linha->ativo==0) ? '<i class="ion-close fa-2x text-danger"></i>' : '<i class="ion-checkmark fa-2x text-success"></i>',
                 ($linha->adm==0) ? '<i class="ion-close fa-2x text-danger"></i>' : '<i class="ion-checkmark fa-2x text-success"></i>',
-                anchor("usuarios/editar/$linha->id", '<i class="ion-trash-a fa-2x text-inverse"></i>', 'Deletar').' '.anchor("usuarios/editar/$linha->id",'<i class="ion-edit fa-2x text-inverse"></i>', 'Editar').' '.anchor("usuarios/alterar_senha/$linha->id",'<i class="ion-locked fa-2x text-inverse"></i>', 'Alterar Senha')
+                anchor("usuarios/excluir/$linha->id", '<i class="ion-trash-a fa-2x text-inverse deletar"></i>', 'Deletar').' '.anchor("usuarios/editar/$linha->id",'<i class="ion-edit fa-2x text-inverse"></i>', 'Editar').' '.anchor("usuarios/alterar_senha/$linha->id",'<i class="ion-locked fa-2x text-inverse"></i>', 'Alterar Senha')
                 );
             $this->table->add_row($conteudo);
         }

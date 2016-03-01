@@ -50,7 +50,7 @@ function iniciar_painel(){
     set_tema('headerinc', load_css('bootstrap.min','css/bootstrap'), FALSE);
     set_tema('headerinc', load_css('font-awesome.min', 'css/font-awesome/css'), FALSE);
     set_tema('headerinc', load_css(array('animate.min', 'style.min', 'style-responsive.min', 'default')), FALSE);
-    set_tema('footerinc', load_js(array('jquery-1.9.1.min', 'jquery-migrate-1.1.0.min'),'js/jquery'), FALSE);
+    set_tema('headerinc', load_js(array('jquery-1.9.1.min', 'jquery-migrate-1.1.0.min'),'js/jquery'), FALSE);
     set_tema('footerinc', load_js('jquery-ui.min', 'js/jquery-ui/ui/'), FALSE);
     set_tema('footerinc', load_js(array('bootstrap.min', 'jquery.slimscroll.min', 'apps.min')), FALSE);
     
