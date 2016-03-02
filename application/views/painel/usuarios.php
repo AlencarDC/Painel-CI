@@ -159,8 +159,8 @@
                 $linha->nome,
                 $linha->login,
                 $linha->email,
-                ($linha->ativo==0) ? '<i class="ion-close fa-2x text-danger"></i>' : '<i class="ion-checkmark fa-2x text-success"></i>',
-                ($linha->adm==0) ? '<i class="ion-close fa-2x text-danger"></i>' : '<i class="ion-checkmark fa-2x text-success"></i>',
+                ($linha->ativo==0) ? '<i class="ion-close fa-2x text-danger"></i>Não' : '<i class="ion-checkmark fa-2x text-success"></i>Sim',
+                ($linha->adm==0) ? '<i class="ion-close fa-2x text-danger"></i>Não' : '<i class="ion-checkmark fa-2x text-success"></i>Sim',
                 anchor("usuarios/excluir/$linha->id", '<i class="ion-trash-a fa-2x text-inverse deletar"></i>', 'Deletar').' '.anchor("usuarios/editar/$linha->id",'<i class="ion-edit fa-2x text-inverse"></i>', 'Editar').' '.anchor("usuarios/alterar_senha/$linha->id",'<i class="ion-locked fa-2x text-inverse"></i>', 'Alterar Senha')
                 );
             $this->table->add_row($conteudo);

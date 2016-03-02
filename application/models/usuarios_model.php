@@ -5,6 +5,7 @@ class Usuarios_model extends CI_Model{
     public function fazer_insert($dados=NULL, $redir=TRUE){
         if($dados != NULL){
             if($this->db->insert('usuarios', $dados)){
+                auditoria('Inserção de usuário', 'Houve um INSERT na tabela usuários');
                 define_msg('msgok', 'Inserção efetuada com sucesso', 'sucesso');
             }else{
                 define_msg('msgerro', 'Não foi possivel inserir no banco de dados', 'erro');
@@ -34,6 +35,7 @@ class Usuarios_model extends CI_Model{
     public function fazer_update($dados=NULL,$condicao=NULL,$redirecionar=TRUE){
         if($dados != NULL && is_array($condicao)){
             if($this->db->update('usuarios', $dados, $condicao)){
+                auditoria('Alteração de usuário', 'Houve um UPDATE na tabela usuários');
                 define_msg('msgok', 'Alteração efetuada com sucesso', 'sucesso');
             }else{
                 define_msg('msgerro', 'Não foi possivel atualizar o banco de dados', 'erro');
@@ -45,6 +47,7 @@ class Usuarios_model extends CI_Model{
     public function fazer_delete($condicao=NULL, $redirecionar=TRUE){
         if($condicao!=NULL && is_array($condicao)){
             if($this->db->delete('usuarios', $condicao)){
+                auditoria('Exclusão de usuário', 'Houve um DELTE na tabela usuários');
                 define_msg('msgok', 'Exclusão efetuada com sucesso', 'sucesso');
             }else{
                 define_msg('msgerro', 'Não foi possivel excluir os dados.', 'erro');

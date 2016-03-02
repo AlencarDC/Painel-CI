@@ -194,3 +194,26 @@ function breadcrumb(){
     }
     return '<ol class="breadcrumb pull-right"><li>'.anchor('painel', 'Início').'</li>'.$classe.$metodo.'</ol>';
 }
+
+
+//define um registro na tabela de auditoria
+function auditoria($operacao, $observacao='', $query=TRUE){
+    $CI =& get_instance();
+    $CI->load->library('session');
+    $CI->load->model('auditoria_model');
+    $usuario = 'Desconhecido';
+    if(esta_logado(FALSE)){
+        $usuario = $CI->session->userdata('usuario_login');//ele não tem o login do usuario na sessao, então ele fez pegando do banco... diferente
+    }
+    $ultima_operacao = 'Nulo';
+    if($query){
+        $ultima_operacao = $CI->db->last_query();
+    }
+    $dados = array(
+            'usuario' => $usuario,
+            'operacao' => $operacao,
+            'query' => $ultima_operacao,
+            'observacao' => $observacao,
+    );
+    $CI->auditoria_model->fazer_insert($dados);
+}

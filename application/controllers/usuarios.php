@@ -36,6 +36,7 @@ class Usuarios extends CI_Controller{
                         
                 );
                 $this->session->set_userdata($dados);
+                auditoria('Login no sistema', 'Login efetuado com sucesso');
                 if($redirecionar != ''){
                     redirect($redirecionar);
                 }else{
@@ -69,7 +70,8 @@ class Usuarios extends CI_Controller{
     }
     
     public function logoff(){
-        $this->session->unset_userdata(array('usuario_id','usuario_nome','usuario_email','usuario_login','usuario_adm','usuario_logado'));
+        auditoria('Logoff no sistema', 'Logoff efetuado');
+        $this->session->unset_userdata(array('usuario_id','usuario_nome','usuario_email','usuario_login','usuario_adm','usuario_logado', 'redirecionar'));
         //$this->session->sess_destroy(); //tenho medo de não fazer esse destroy, perguntar sobre para o professor
         $this->session->sess_regenerate(TRUE);
         define_msg('logoffok','O logoff foi efetuado.', 'sucesso');
@@ -93,6 +95,7 @@ class Usuarios extends CI_Controller{
                     $dados['senha'] = md5($novasenha);
                     $this->usuarios_model->fazer_update($dados, array('email' => $email), FALSE);
                     define_msg('msgok', 'Uma nova senha foi enviada para seu email.', 'sucesso');
+                    auditoria('Redefinição de senha', 'Solicitou uma nova senha por email');
                     redirect('usuarios/nova_senha');
                 }else{
                     define_msg('msgerro', 'Não foi possível enviar uma nova senha, contate o administrador.', 'erro');
