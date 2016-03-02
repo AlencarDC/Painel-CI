@@ -121,6 +121,7 @@ function esta_logado($redirecionar=TRUE) {
     if(!isset($usuario_status) OR $usuario_status!=TRUE){
         //$CI->session->sess_destroy();//o ricardo excluiu essa linha
         if($redirecionar){
+            $CI->session->set_userdata(array('redirecionar'=>current_url()));
             define_msg('errologin', 'Acesso restrito, faça login para prosseguir.');
             redirect('usuarios/login');
         }else{
@@ -173,4 +174,23 @@ function verifica_adm($msg=FALSE){
     }else{
         return TRUE;
     }
+}
+
+//gera um breadcrumb com base no controller atual
+function breadcrumb(){
+    $CI =& get_instance();
+    $CI->load->helper('url');
+    $classe = ucfirst($CI->router->class);
+    if($classe == 'Painel'){
+        $classe = '<li>'.anchor($CI->router->class, 'Início').'</li>';
+    }else{
+        $classe = '<li>'.anchor($CI->router->class, $classe).'</li>';
+    }
+    $metodo = ucwords(str_replace('_', ' ', $CI->router->method));
+    if($metodo && $metodo != 'Index'){
+        $metodo = '<li>'.$metodo.'</li>';
+    }else{
+        $metodo = '';
+    }
+    return '<ol class="breadcrumb pull-right"><li>'.anchor('painel', 'Início').'</li>'.$classe.$metodo.'</ol>';
 }

@@ -30,6 +30,7 @@
         echo '<div class="form-group m-b-20">';
             echo form_password(array('name'=>'senha', 'class'=>'form-control input-lg', 'placeholder'=>'Senha'), set_value('senha'));
         echo '</div>';
+            echo form_hidden('redirecionar', $this->session->userdata('redirecionar'));
         echo '<p>'.anchor('usuarios/nova_senha', 'Esqueci minha senha').'</p>';
         echo '<div class="login-buttons">';
             echo form_submit(array('name'=>'logar', 'class'=>'btn btn-success btn-block btn-lg'), 'Login');
@@ -79,6 +80,7 @@
     
     case 'cadastrar':
         echo '<div id="content" class="content">
+            '.breadcrumb().'
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
@@ -139,6 +141,7 @@
                 });
               </script>';
         echo '<div id="content" class="content">
+            '.breadcrumb().'
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-inverse">
@@ -177,6 +180,7 @@
             redirect('usuarios/gerenciar');
         }
         echo '<div id="content" class="content">
+            '.breadcrumb().'
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
@@ -237,6 +241,7 @@
             redirect('usuarios/gerenciar');
         }
         echo '<div id="content" class="content">
+            '.breadcrumb().'
             <div class="row">
                 <div class="col-md-6">
                     <div class="panel panel-inverse" data-sortable-id="form-stuff-1">

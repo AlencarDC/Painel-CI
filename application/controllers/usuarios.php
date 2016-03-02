@@ -9,7 +9,7 @@ class Usuarios extends CI_Controller{
     }
     
     public function index(){
-        $this->load->view('');
+        $this->gerenciar();
     }
     
     public function login(){
@@ -23,6 +23,7 @@ class Usuarios extends CI_Controller{
         if($this->form_validation->run()==TRUE){
             $usuario = $this->input->post('usuario', TRUE);
             $senha = md5($this->input->post('senha', TRUE));
+            $redirecionar = $this->input->post('redirecionar', TRUE);
             if($this->usuarios_model->fazer_login($usuario, $senha) == TRUE){
                 $consulta = $this->usuarios_model->pega_login($usuario)->row();
                 $dados = array(
@@ -35,7 +36,11 @@ class Usuarios extends CI_Controller{
                         
                 );
                 $this->session->set_userdata($dados);
-                redirect('painel');
+                if($redirecionar != ''){
+                    redirect($redirecionar);
+                }else{
+                    redirect('painel');
+                }
             }else{ 
                 $consulta = $this->usuarios_model->pega_login($usuario)->row();
                 if(empty($consulta)){

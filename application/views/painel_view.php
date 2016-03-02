@@ -66,15 +66,15 @@
                         <!-- begin sidebar nav -->
                         <ul class="nav">
                                 <li class="nav-header">Menu</li>
-                                <li class="has-sub">
+                                <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Usuarios') ? 'active': ''; ?>">
                                         <a href="javascript:;">
                                             <b class="caret pull-right"></b>
                                             <i class="fa fa-users"></i>
                                             <span>Usuários</span>
                                     </a>
                                         <ul class="sub-menu">
-                                            <li><?php echo anchor('usuarios/gerenciar', 'Gerenciar'); ?></li>
-                                            <li><?php echo anchor('usuarios/cadastrar', 'Cadastrar'); ?></li>
+                                            <li <?php echo ($this->router->method == 'gerenciar') ? 'class="active"': ''; ?> > <?php echo anchor('usuarios/gerenciar', 'Gerenciar'); ?></li>
+                                            <li <?php echo ($this->router->method == 'cadastrar') ? 'class="active"': ''; ?> > <?php echo anchor('usuarios/cadastrar', 'Cadastrar'); ?></li>
                                         </ul>
                                 </li>
                                 <li class="has-sub">
