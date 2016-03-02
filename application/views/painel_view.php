@@ -77,6 +77,16 @@
                                             <li <?php echo ($this->router->method == 'cadastrar') ? 'class="active"': ''; ?> > <?php echo anchor('usuarios/cadastrar', 'Cadastrar'); ?></li>
                                         </ul>
                                 </li>
+                                <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Auditoria') ? 'active': ''; ?>">
+                                        <a href="javascript:;">
+                                            <b class="caret pull-right"></b>
+                                            <i class="fa fa-cogs"></i>
+                                            <span>Administração</span>
+                                    </a>
+                                        <ul class="sub-menu">
+                                            <li <?php echo ($this->router->method == 'gerenciar') ? 'class="active"': ''; ?> > <?php echo anchor('auditoria/gerenciar', 'Auditoria'); ?></li>
+                                        </ul>
+                                </li>
                                 <li class="has-sub">
                                         <a href="javascript:;">
                                                 <span class="badge pull-right">10</span>

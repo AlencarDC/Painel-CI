@@ -25,7 +25,10 @@ class Auditoria_model extends CI_Model{
     }
     
     //pega todos registros da tabela usuarios
-    public function pega_usuarios(){
+    public function pega_usuarios($limite=0){
+        if($limite>0){
+            $this->db->limit($limite);
+        }
         return $this->db->get('auditoria');
     }
     
