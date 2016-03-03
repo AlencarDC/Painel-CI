@@ -6,11 +6,12 @@
             <file>file:/C:/wamp/www/painelci/application/controllers/painel.php</file>
             <file>file:/C:/wamp/www/painelci/application/views/painel_view.php</file>
             <file>file:/C:/wamp/www/painelci/application/helpers/funcoes_helper.php</file>
-            <file>file:/C:/wamp/www/painelci/application/views/painel/usuarios.php</file>
             <file>file:/C:/wamp/www/painelci/application/config/autoload.php</file>
             <file>file:/C:/wamp/www/painelci/application/libraries/sistema.php</file>
-            <file>file:/C:/wamp/www/painelci/application/models/auditoria_model.php</file>
-            <file>file:/C:/wamp/www/painelci/application/models/usuarios_model.php</file>
+            <file>file:/C:/wamp/www/painelci/css/default.css</file>
+            <file>file:/C:/wamp/www/painelci/application/models/midia_model.php</file>
+            <file>file:/C:/wamp/www/painelci/application/views/painel/midia.php</file>
+            <file>file:/C:/wamp/www/painelci/application/controllers/midia.php</file>
             <file>file:/C:/wamp/www/painelci/application/controllers/usuarios.php</file>
         </group>
     </open-files>

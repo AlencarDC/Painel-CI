@@ -77,6 +77,17 @@
                                             <li <?php echo ($this->router->method == 'cadastrar') ? 'class="active"': ''; ?> > <?php echo anchor('usuarios/cadastrar', 'Cadastrar'); ?></li>
                                         </ul>
                                 </li>
+                                <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Midia') ? 'active': ''; ?>">
+                                        <a href="javascript:;">
+                                            <b class="caret pull-right"></b>
+                                            <i class="fa fa-cogs"></i>
+                                            <span>Mídia</span>
+                                    </a>
+                                        <ul class="sub-menu">
+                                            <li <?php echo ($this->router->method == 'gerenciar') ? 'class="active"': ''; ?> > <?php echo anchor('midia/gerenciar', 'Gerenciar'); ?></li>
+                                            <li <?php echo ($this->router->method == 'inserir') ? 'class="active"': ''; ?> > <?php echo anchor('midia/inserir', 'Inserir Mídias'); ?></li>
+                                        </ul>
+                                </li>
                                 <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Auditoria') ? 'active': ''; ?>">
                                         <a href="javascript:;">
                                             <b class="caret pull-right"></b>
