@@ -34,8 +34,13 @@ class Midia extends CI_Controller{
         set_tema('footerinc', '<script>
 		$(document).ready(function() {
 			App.init(); 
+                        $("#arquivo").fileinput({\'showUpload\':false, \'previewFileType\':\'any\', \'language\':\'pt-BR\',\'allowedFileExtensions\' : [\'jpg\', \'png\',\'gif\'], \'maxFileSize\': 5000,
+
+});
 		});
 	</script>', FALSE);
+        set_tema('headerinc', load_css('fileinput', 'css/upload/css'), FALSE);
+        set_tema('headerinc', load_js(array('fileinput.min', 'fileinput_locale_pt-BR'),'js/upload'), FALSE);
         set_tema('titulo', 'Upload de Imagens');
         set_tema('conteudo', load_modulo('midia', 'inserir'));
         set_tema('rodape', '');//vai substituir o rodape padrao
@@ -43,7 +48,7 @@ class Midia extends CI_Controller{
         
     }
     
-    public function gerenciar(){
+    public function gerenciar_midia(){
         $this->load->library('table');
         
         //vai carregar o modulo usuarios e mostrar a tela de recuperação de senha
@@ -62,9 +67,55 @@ class Midia extends CI_Controller{
                         $(\'[data-toggle="tooltip"]\').tooltip();   
 		});
 	</script>', FALSE);
-        set_tema('titulo', 'Registros da Auditoria');
-        set_tema('conteudo', load_modulo('auditoria', 'gerenciar'));
+        set_tema('titulo', 'Listagem de Mídias');
+        set_tema('conteudo', load_modulo('midia', 'gerenciar'));
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
+    }
+    
+    public function editar(){
+        $this->form_validation->set_rules('nome', 'NOME', 'trim|required|ucfirst');
+        $this->form_validation->set_rules('descricao', 'DESCRIÇÃO', 'trim');
+        if($this->form_validation->run()==TRUE){
+            $dados = elements(array('nome', 'descricao'), $this->input->post());
+            $this->midia_model->fazer_update($dados, array('id' => $this->input->post('idmidia')));
+        }
+        set_tema('footerinc', '<script>
+            $(document).ready(function() {
+                    App.init();
+            });
+	</script>', FALSE);
+        set_tema('titulo', 'Alterar Mídias');
+        set_tema('conteudo', load_modulo('midia', 'editar'));
+        set_tema('rodape', '');//vai substituir o rodape padrao
+        load_template();
+    }
+   
+    public function excluir(){
+        if(verifica_adm(TRUE)){
+            $idmidia = $this->uri->segment(3);
+            if($idmidia != NULL){
+                $consulta = $this->midia_model->pega_id($idmidia);
+                if($consulta->num_rows()==1){
+                    $consulta = $consulta->row();
+                    echo $consulta->arquivo;
+                    unlink("./uploads/$consulta->arquivo");
+                    $miniaturas = glob("./uploads/thumbs/*_$consulta->arquivo");
+                    foreach($miniaturas as $arquivo){
+                        unlink($arquivo);
+                    }
+                    
+                    $this->midia_model->fazer_delete(array('id'=>$consulta->id), FALSE);
+                    
+                }else{
+                    define_msg('midiaerro', 'Mídia não encontrado para exclusão.', 'erro');
+                }
+            }else{
+                define_msg('midiaerro', 'Escolha uma mídia para excluir.', 'erro');
+            }
+        }
+        define_msg('midiaerro', 'Seu usuário não tem permissão para executar essa operação.', 'erro');
+        redirect('midia/gerenciar_midia');
+        
     }
 }

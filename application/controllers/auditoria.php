@@ -11,10 +11,10 @@ class Auditoria extends CI_Controller{
     }
     
     public function index(){
-        $this->gerenciar();
+        $this->gerenciar_auditoria();
     }
     
-    public function gerenciar(){
+    public function gerenciar_auditoria(){
         $this->load->library('table');
         
         //vai carregar o modulo usuarios e mostrar a tela de recuperação de senha
@@ -34,7 +34,7 @@ class Auditoria extends CI_Controller{
 		});
 	</script>', FALSE);
         set_tema('titulo', 'Registros da Auditoria');
-        set_tema('conteudo', load_modulo('auditoria', 'gerenciar'));
+        set_tema('conteudo', load_modulo('auditoria', 'gerenciar_auditoria'));
         set_tema('rodape', '');//vai substituir o rodape padrao
         load_template();
     }

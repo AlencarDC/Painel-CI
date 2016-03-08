@@ -80,11 +80,11 @@
                                 <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Midia') ? 'active': ''; ?>">
                                         <a href="javascript:;">
                                             <b class="caret pull-right"></b>
-                                            <i class="fa fa-cogs"></i>
+                                            <i class="fa fa-picture-o"></i>
                                             <span>Mídia</span>
                                     </a>
                                         <ul class="sub-menu">
-                                            <li <?php echo ($this->router->method == 'gerenciar') ? 'class="active"': ''; ?> > <?php echo anchor('midia/gerenciar', 'Gerenciar'); ?></li>
+                                            <li <?php echo ($this->router->method == 'gerenciar_midia') ? 'class="active"': ''; ?> > <?php echo anchor('midia/gerenciar_midia', 'Gerenciar'); ?></li>
                                             <li <?php echo ($this->router->method == 'inserir') ? 'class="active"': ''; ?> > <?php echo anchor('midia/inserir', 'Inserir Mídias'); ?></li>
                                         </ul>
                                 </li>
@@ -95,7 +95,7 @@
                                             <span>Administração</span>
                                     </a>
                                         <ul class="sub-menu">
-                                            <li <?php echo ($this->router->method == 'gerenciar') ? 'class="active"': ''; ?> > <?php echo anchor('auditoria/gerenciar', 'Auditoria'); ?></li>
+                                            <li <?php echo ($this->router->method == 'gerenciar_auditoria') ? 'class="active"': ''; ?> > <?php echo anchor('auditoria/gerenciar_auditoria', 'Auditoria'); ?></li>
                                         </ul>
                                 </li>
                                 <li class="has-sub">

@@ -217,3 +217,33 @@ function auditoria($operacao, $observacao='', $query=TRUE){
     );
     $CI->auditoria_model->fazer_insert($dados);
 }
+
+//gera uma miniatura de uma imagem caso ela ainda nao exista
+function miniatura($imagem=NULL, $largura=100, $altura=75, $gera_tag=TRUE){
+    $CI =& get_instance();
+    $CI->load->helper('file');
+    $miniatura = $largura.'x'.$altura.'_'.$imagem;
+    $miniatura_info = get_file_info('.uploads/thumbs'.$miniatura);
+    if($miniatura_info!=FALSE){
+        $retorno = base_url('uploads/thumbs/'.$miniatura);
+    }else{
+        $CI->load->library('image_lib');
+        $config['image_library'] = 'gd2'; //servidor web tem q ter instalado gd2!
+        $config['source_image'] = './uploads/'.$imagem;
+        $config['new_image'] = './uploads/thumbs/'.$miniatura;
+        $config['maintain_ratio'] = TRUE;
+        $config['width'] = $largura;
+        $config['height'] = $altura;
+        $CI->image_lib->initialize($config);
+        if($CI->image_lib->resize()){
+            $CI->image_lib->clear();
+            $retorno = base_url('uploads/thumbs/'.$miniatura);
+        }else{
+            $retorno = FALSE;
+        }
+    }
+    if($gera_tag && $retorno!=FALSE){
+        $retorno = '<img src="'.$retorno.'" alt="" />';
+    }
+    return $retorno;
+}

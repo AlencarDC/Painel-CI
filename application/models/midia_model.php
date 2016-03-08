@@ -14,6 +14,32 @@ class Midia_model extends CI_Model{
         }
     }
     
+    //
+    public function fazer_update($dados=NULL,$condicao=NULL,$redirecionar=TRUE){
+        if($dados != NULL && is_array($condicao)){
+            if($this->db->update('midia', $dados, $condicao)){
+                auditoria('Alteração de mídia', 'A mídia com o id"'.$condicao['id'].'" foi alterada');
+                define_msg('midiaok', 'Alteração efetuada com sucesso', 'sucesso');
+            }else{
+                define_msg('midiaerro', 'Não foi possivel atualizar o banco de dados', 'erro');
+            }
+            if($redirecionar){redirect(current_url());}
+        }
+    }
+    
+    public function fazer_delete($condicao=NULL, $redirecionar=TRUE){
+        if($condicao!=NULL && is_array($condicao)){
+            if($this->db->delete('midia', $condicao)){
+                auditoria('Exclusão de mídia', 'A mídia com o id '.$condicao['id'].' foi excluída.');
+                define_msg('midiaok', 'Exclusão efetuada com sucesso.', 'sucesso');
+            }else{
+                define_msg('midiaerro', 'Não foi possivel excluir os dados.', 'erro');
+            }
+            if($redirecionar){redirect(current_url());}
+        }
+    }
+    
+    
     public function fazer_upload($campo){
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png';
@@ -25,6 +51,21 @@ class Midia_model extends CI_Model{
         }
     }
     
+    //pega todos registros da tabela usuarios
+    public function pega_midia(){
+        return $this->db->get('midia');
+    }
+    
+    //pega as informações de algum usuario através do id dele
+    public function pega_id($id=NULL){
+        if ($id != NULL) {
+            $this->db->where('id', $id);
+            $this->db->limit(1);
+            return $this->db->get('midia');
+        } else {
+            return FALSE;
+        }
+    }
 }
 
 

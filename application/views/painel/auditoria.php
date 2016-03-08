@@ -2,7 +2,7 @@
 
  switch ($tela) {
     
-    case 'gerenciar':
+    case 'gerenciar_auditoria':
         echo '<script type="text/javascript">
                 $(function(){
                     $(".deletar").click(function(){
@@ -41,9 +41,9 @@
         }
         echo $this->table->generate();
         if($modo == 'tudo'){
-            echo anchor('auditoria/gerenciar', 'Voltar', array('class'=>'btn btn-inverse btn-sm m-r-5 m-b-5'));
+            echo anchor('auditoria/gerenciar_auditoria', 'Voltar', array('class'=>'btn btn-inverse btn-sm m-r-5 m-b-5'));
         }else{
-            echo anchor('auditoria/gerenciar/tudo', 'Ver tudo', array('class'=>'btn btn-inverse btn-sm m-r-5 m-b-5')); 
+            echo anchor('auditoria/gerenciar_auditoria/tudo', 'Ver tudo', array('class'=>'btn btn-inverse btn-sm m-r-5 m-b-5')); 
         }
         echo '          </div>
                     </div>
