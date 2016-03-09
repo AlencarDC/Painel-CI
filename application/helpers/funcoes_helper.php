@@ -264,3 +264,32 @@ function miniatura($imagem=NULL, $largura=100, $altura=75, $gera_tag=TRUE){
     }
     return $retorno;
 }
+
+//gera um slug baseado no titulo
+function slug($texto=NULL){
+    $texto = remove_acentos($texto); //remover acentos
+    return url_title($texto, '-', TRUE);
+}
+
+//remove acentos e caracteres especiais de uma string
+function remove_acentos($string=NULL){
+    $procurar   = array('á','à','â','ã','ª','Á','À','Â','Ã', 'é','è','ê','É','È','Ê','í','ì','î','Í','Ì','Î','ò','ó','ô', 'õ','º','Ó','Ò','Ô','Õ','ú','ù','û','Ú','Ù','Û','ç','Ç','Ñ','ñ');
+    $substituir = array('a','a','a','a','a','A','A','A','A','e','e','e','E','E','E','i','i','i','I','I','I','o','o','o','o','o','O','O','O','O','u','u','u','U','U','U','c','C','N','n');
+    return str_replace($procurar, $substituir, $string);
+}
+
+//gera o resumo de uma página/string
+function resumir($texto=NULL, $palavras=50, $decodificar=TRUE, $remover_tags=TRUE){
+    if($texto != NULL){
+       if($decodificar){
+           $texto = html_entity_decode($texto);
+        } 
+       if($remover_tags){
+           strip_tags($texto);
+        }
+        $retorno = word_limiter($texto, $palavras);
+    }else{
+        $retorno = FALSE;
+    }
+    return $retorno;
+}

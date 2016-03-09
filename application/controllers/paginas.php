@@ -14,18 +14,13 @@ class Paginas extends CI_Controller{
     
     public function inserir(){
         esta_logado(TRUE);
-        $this->form_validation->set_rules('nome', 'NOME', 'trim|required|ucfirst');
-        $this->form_validation->set_rules('descricao', 'DESCRIÇÃO', 'trim');
+        $this->form_validation->set_rules('titulo', 'TÍTULO', 'trim|required|ucfirst');
+        $this->form_validation->set_rules('slug', 'SLUG', 'trim');
+        $this->form_validation->set_rules('conteudo', 'CONTEÚDO', 'trim|required|htmlentities');
         if($this->form_validation->run()==TRUE){
-            $upload = $this->paginas_model->fazer_upload('arquivo');
-            if(is_array($upload) && $upload['file_name'] != ''){
-                $dados = elements(array('nome', 'descricao'), $this->input->post());
-                $dados['arquivo'] = $upload['file_name'];
-                $this->paginas_model->fazer_insert($dados);
-            }else{
-                define_msg('paginaerro', $upload, 'erro');
-                redirect(current_url());
-            }
+            $dados = elements(array('titulo', 'slug', 'conteudo'), $this->input->post());
+            ($dados['slug'] != '') ? $dados['slug'] = slug($dados['slug']) : $dados['slug'] = slug($dados['titulo']);
+            $this->paginas_model->fazer_insert($dados);
         }
         
         //vai carregar o modulo usuarios e mostrar a tela de recuperação de senha
