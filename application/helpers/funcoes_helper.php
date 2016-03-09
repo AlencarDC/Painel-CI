@@ -56,6 +56,23 @@ function iniciar_painel(){
     
 }
 
+//inicializa o TinyMCE para criação de textarea com editor html
+function iniciar_editor(){
+    $CI =& get_instance();
+    
+    set_tema('headerinc', load_js(base_url('htmleditor/tinymce.min.js'), NULL, TRUE), FALSE);
+    set_tema('headerinc', load_js(base_url('htmleditor/init_editor.js'), NULL, TRUE), FALSE);
+}
+
+//retorna ou printa o conteudo de uma view
+function incluir_arquivo($arquivo, $pasta='includes', $mostrar=TRUE){
+    $CI =& get_instance();
+    if($mostrar){
+        echo $CI->load->view("$pasta/$arquivo", '', TRUE);
+        return TRUE;
+    }
+    return $CI->load->view("$pasta/$arquivo", '', TRUE);
+}
 //carrega um template passando o array $tema como parametro
 function load_template(){
     $CI =& get_instance();

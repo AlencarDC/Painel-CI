@@ -77,6 +77,17 @@
                                             <li <?php echo ($this->router->method == 'cadastrar') ? 'class="active"': ''; ?> > <?php echo anchor('usuarios/cadastrar', 'Cadastrar'); ?></li>
                                         </ul>
                                 </li>
+                                <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Paginas') ? 'active': ''; ?>">
+                                        <a href="javascript:;">
+                                            <b class="caret pull-right"></b>
+                                            <i class="fa fa-file-text-o"></i>
+                                            <span>Páginas</span>
+                                    </a>
+                                        <ul class="sub-menu">
+                                            <li <?php echo ($this->router->method == 'gerenciar_paginas') ? 'class="active"': ''; ?> > <?php echo anchor('paginas/gerenciar_paginas', 'Gerenciar páginas'); ?></li>
+                                            <li <?php echo ($this->router->method == 'inserir' && ucfirst($this->router->class) == 'Paginas') ? 'class="active"': ''; ?> > <?php echo anchor('paginas/inserir', 'Inserir nova página'); ?></li>
+                                        </ul>
+                                </li>
                                 <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Midia') ? 'active': ''; ?>">
                                         <a href="javascript:;">
                                             <b class="caret pull-right"></b>
@@ -85,7 +96,7 @@
                                     </a>
                                         <ul class="sub-menu">
                                             <li <?php echo ($this->router->method == 'gerenciar_midia') ? 'class="active"': ''; ?> > <?php echo anchor('midia/gerenciar_midia', 'Gerenciar'); ?></li>
-                                            <li <?php echo ($this->router->method == 'inserir') ? 'class="active"': ''; ?> > <?php echo anchor('midia/inserir', 'Inserir Mídias'); ?></li>
+                                            <li <?php echo ($this->router->method == 'inserir' && ucfirst($this->router->class) == 'Midia') ? 'class="active"': ''; ?> > <?php echo anchor('midia/inserir', 'Inserir Mídias'); ?></li>
                                         </ul>
                                 </li>
                                 <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Auditoria') ? 'active': ''; ?>">
