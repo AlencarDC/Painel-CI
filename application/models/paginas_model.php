@@ -17,7 +17,7 @@ class Paginas_model extends CI_Model{
     //
     public function fazer_update($dados=NULL,$condicao=NULL,$redirecionar=TRUE){
         if($dados != NULL && is_array($condicao)){
-            if($this->db->update('pagina', $dados, $condicao)){
+            if($this->db->update('paginas', $dados, $condicao)){
                 auditoria('Alteração do conteúdo de página', 'A página com o id"'.$condicao['id'].'" foi alterada');
                 define_msg('paginaok', 'Alteração efetuada com sucesso', 'sucesso');
             }else{

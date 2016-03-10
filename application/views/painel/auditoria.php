@@ -28,7 +28,7 @@
         }
         $this->table->set_template(array('table_open'=>'<table id="data-table" class="table table-striped table-bordered nowrap" width="100%">'));
         $this->table->set_heading('Usuário', 'Data e Hora', 'Operação', 'Observação');
-        $consulta = $this->auditoria_model->pega_usuarios($limite)->result();
+        $consulta = $this->auditoria_model->pega_auditoria($limite)->result();
         foreach ($consulta as $linha) {
             $conteudo = array(
                 $linha->usuario,

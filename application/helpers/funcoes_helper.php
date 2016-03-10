@@ -282,7 +282,7 @@ function remove_acentos($string=NULL){
 function resumir($texto=NULL, $palavras=50, $decodificar=TRUE, $remover_tags=TRUE){
     if($texto != NULL){
        if($decodificar){
-           $texto = html_entity_decode($texto);
+           $texto = transforma_html($texto);
         } 
        if($remover_tags){
            strip_tags($texto);
@@ -292,4 +292,9 @@ function resumir($texto=NULL, $palavras=50, $decodificar=TRUE, $remover_tags=TRU
         $retorno = FALSE;
     }
     return $retorno;
+}
+
+//converte dados do banco de dados para html
+function transforma_html($texto=NULL){
+    return html_entity_decode($texto);
 }

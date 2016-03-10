@@ -25,10 +25,11 @@ class Auditoria_model extends CI_Model{
     }
     
     //pega todos registros da tabela usuarios
-    public function pega_usuarios($limite=0){
+    public function pega_auditoria($limite=0){
         if($limite>0){
             $this->db->limit($limite);
         }
+        $this->db->order_by('data_hora', 'DESC');
         return $this->db->get('auditoria');
     }
     
