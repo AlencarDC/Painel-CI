@@ -91,4 +91,11 @@ Website: http://www.seantheme.com/color-admin-v1.9/admin/
 input[type="file"]{
     margin-bottom: 15px;
 }
+
+.retorno{
+    margin-top: 10px;
+}
+.retorno img{
+    margin: 0 5 5 0;
+}
     

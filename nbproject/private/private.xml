@@ -9,9 +9,12 @@
             <file>file:/C:/wamp/www/painelci/htmleditor/init_editor.js</file>
             <file>file:/C:/wamp/www/painelci/application/models/paginas_model.php</file>
             <file>file:/C:/wamp/www/painelci/application/helpers/funcoes_helper.php</file>
+            <file>file:/C:/wamp/www/painelci/application/views/includes/inseririmg.php</file>
             <file>file:/C:/wamp/www/painelci/application/libraries/sistema.php</file>
+            <file>file:/C:/wamp/www/painelci/application/models/midia_model.php</file>
             <file>file:/C:/wamp/www/painelci/application/controllers/paginas.php</file>
             <file>file:/C:/wamp/www/painelci/application/controllers/midia.php</file>
+            <file>file:/C:/wamp/www/painelci/application/controllers/usuarios.php</file>
         </group>
     </open-files>
 </project-private>

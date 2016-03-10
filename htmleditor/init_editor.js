@@ -3,7 +3,7 @@ tinymce.init({
   language: 'pt_BR',
   relative_urls: false,
   relative_script_host: false,
-  height: 500,
+  height: 400,
   theme: 'modern',
   plugins: [
     'advlist autolink lists link image charmap print preview hr anchor pagebreak',

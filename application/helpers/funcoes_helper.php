@@ -59,7 +59,7 @@ function iniciar_painel(){
 //inicializa o TinyMCE para criação de textarea com editor html
 function iniciar_editor(){
     $CI =& get_instance();
-    
+    set_tema('headerinc', load_js(base_url('htmleditor/jquery.tinymce.min.js'), NULL, TRUE), FALSE);
     set_tema('headerinc', load_js(base_url('htmleditor/tinymce.min.js'), NULL, TRUE), FALSE);
     set_tema('headerinc', load_js(base_url('htmleditor/init_editor.js'), NULL, TRUE), FALSE);
 }
