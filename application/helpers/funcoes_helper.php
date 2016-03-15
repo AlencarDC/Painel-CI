@@ -298,3 +298,41 @@ function resumir($texto=NULL, $palavras=50, $decodificar=TRUE, $remover_tags=TRU
 function transforma_html($texto=NULL){
     return html_entity_decode($texto);
 }
+
+//salva ou atualiza uma configuracao do db
+function define_config($nome, $valor=''){
+    $CI =& get_instance();
+    $CI->load->model('configuracoes_model');
+    if($CI->configuracoes_model->pega_nome_config($nome)->num_rows() == 1){
+        if(trim($valor)==''){
+            $CI->configuracoes_model->fazer_delete(array('nome_config'=>$nome), FALSE);
+        }else{
+            $dados = array(
+              'nome_config'=> $nome,
+              'valor_config'=> $valor,
+            );
+            $CI->configuracoes_model->fazer_update($dados,array('nome_config'=>$nome), FALSE);
+        }
+        
+    }else{
+        $dados = array(
+              'nome_config'=> $nome,
+              'valor_config'=> $valor,
+            );
+        $CI->configuracoes_model->fazer_insert($dados, FALSE);
+    }    
+}
+
+//retorna uma ocnfiguracao do db
+function retorna_config($nome){
+    $CI =& get_instance();
+    $CI->load->model('configuracoes_model');
+    $configuracao = $CI->configuracoes_model->pega_nome_config($nome);
+    if($configuracao->num_rows() == 1){
+        $configuracao = $configuracao->row();
+        return $configuracao->valor_config;
+    }else{
+        return NULL;
+    }
+    
+}

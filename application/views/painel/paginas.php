@@ -28,6 +28,8 @@
                         </div>';
         echo '          <div class="form-group">
                             <label>Contéudo</label>';
+            echo '<p>'.anchor('#', '<i class="fa fa-plus"></i> Inserir Imagem', 'class="btn btn-primary btn-md m-r-5" data-toggle="modal" data-target="#janela"');
+            echo anchor('midia/inserir', 'Upload de Imagens', 'class="btn btn-white btn-md m-r-5" target="_blank"').'</p>';
             echo form_textarea(array('name'=>'conteudo', 'id'=>'editor'), set_value('conteudo'));
         echo '</div>';
             echo form_submit(array('name'=>'publicar', 'class'=>'btn btn-sm btn-success m-r-5'), 'Publicar');
@@ -38,6 +40,7 @@
                 </div>
             </div>
             </div>';
+        incluir_arquivo('inseririmg');
         break;
     
     case 'gerenciar':
