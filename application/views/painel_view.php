@@ -99,46 +99,10 @@
                                             <li <?php echo ($this->router->method == 'inserir' && ucfirst($this->router->class) == 'Midia') ? 'class="active"': ''; ?> > <?php echo anchor('midia/inserir', 'Inserir Mídias'); ?></li>
                                         </ul>
                                 </li>
-                                <li class="has-sub <?php echo (ucfirst($this->router->class) == 'Auditoria') ? 'active': ''; ?>">
-                                        <a href="javascript:;">
-                                            <b class="caret pull-right"></b>
-                                            <i class="fa fa-cogs"></i>
-                                            <span>Administração</span>
-                                    </a>
-                                        <ul class="sub-menu">
-                                            <li <?php echo ($this->router->method == 'gerenciar_auditoria') ? 'class="active"': ''; ?> > <?php echo anchor('auditoria/gerenciar_auditoria', 'Auditoria'); ?></li>
-                                        </ul>
+                                <li class="<?php echo (ucfirst($this->router->class) == 'Auditoria' AND $this->router->method == 'gerenciar_auditoria') ? 'active': ''; ?>">
+                                    <?php echo anchor('auditoria/gerenciar_auditoria', '<i class="fa fa-cogs"></i><span>Administração</span>'); ?>
                                 </li>
-                                <li class="has-sub">
-                                        <a href="javascript:;">
-                                                <span class="badge pull-right">10</span>
-                                                <i class="fa fa-inbox"></i> 
-                                                <span>Email</span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li><a href="email_inbox.html">Inbox v1</a></li>
-                                        </ul>
-                                </li>
-                                <li class="has-sub">
-                                        <a href="javascript:;">
-                                            <b class="caret pull-right"></b>
-                                            <i class="fa fa-suitcase"></i>
-                                            <span>UI Elements</span> 
-                                        </a>
-                                        <ul class="sub-menu">
-                                                <li><a href="ui_general.html">General</a></li>
-                                        </ul>
-                                </li>
-                                <li class="has-sub">
-                                        <a href="javascript:;">
-                                            <b class="caret pull-right"></b>
-                                            <i class="fa fa-file-o"></i>
-                                            <span>Form Stuff</span> 
-                                        </a>
-                                        <ul class="sub-menu">
-                                                <li><a href="form_elements.html">Form Elements</a></li>
-                                        </ul>
-                                </li>
+                                
                         <!-- begin sidebar minify button -->
                                 <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
                         <!-- end sidebar minify button -->

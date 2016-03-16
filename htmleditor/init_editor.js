@@ -9,10 +9,10 @@ tinymce.init({
     'advlist autolink lists link image charmap print preview hr anchor pagebreak',
     'searchreplace wordcount visualblocks visualchars code fullscreen',
     'insertdatetime media nonbreaking save table contextmenu directionality',
-    'template paste textcolor colorpicker textpattern imagetools'
+    'template paste textpattern imagetools'
   ],
   toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-  toolbar2: 'print preview | forecolor fontselect formatselect fontsizeselect',
+  toolbar2: 'print preview | formatselect fontsizeselect',
   image_advtab: true,
   templates: [
     { title: 'Test template 1', content: 'Test 1' },
